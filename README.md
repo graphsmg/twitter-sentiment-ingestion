@@ -3,4 +3,4 @@
 {twitter -> kafka -> spark -> mongo -> plotly} ingestion pipelines
 
 Software Architecture:
-![alt text](http://images/twitter-analysis.jpeg)
+![Architecture & Process Flow](http://https://github.com/graphsmg/twitter-sentiment-ingestion/blob/c-working-branch/images/twitter-analysis.jpeg)
