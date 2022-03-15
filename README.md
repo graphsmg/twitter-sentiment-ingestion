@@ -29,7 +29,16 @@ cd kafka_2.13-3.1.0
 
 ## helpful dev commands 
 
+starting up kafka listenner from shell
 ```
 ~/Downloads/kafka_2.13-3.1.0/bin/kafka-console-consumer.sh --topic test_topic --from-beginning --bootstrap-server localhost:29092
+```
+
+deploying a pyspark script to the spark cluster with kafka tools 
+
+```
+```
+spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.1 
+```
 ```
 
