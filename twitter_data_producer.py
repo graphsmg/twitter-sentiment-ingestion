@@ -11,6 +11,10 @@ bearer_token = os.environ["TWITTER_BEARER_TOKEN"]
 
 
 class TopicStream(tweepy.StreamingClient):
+    def __init__(self, topic, **kwargs):
+        self.topic = topic
+        super().__init__(**kwargs)
+
     def on_tweet(self, tweet):
         data = {
             "streamed_at": str(datetime.datetime.now()),
@@ -25,10 +29,12 @@ class TopicStream(tweepy.StreamingClient):
         }
         json_payload = json.dumps(data)
         byte_payload = bytes(json_payload, "utf-8")
-        r = producer.send(topic="recent_tweets_downloader", value=byte_payload)
+        r = producer.send(self.topic, value=byte_payload)
         r.is_done
 
 
-streaming_client = TopicStream(bearer_token)
+streaming_client = TopicStream(
+    topic="recent_tweets_downloader", bearer_token=bearer_token
+)
 streaming_client.add_rules(tweepy.StreamRule("solana"))
 streaming_client.filter()
