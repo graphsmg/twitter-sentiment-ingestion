@@ -1,4 +1,6 @@
 import time
+import json
+import pprint
 
 from pyspark import SparkContext
 from pyspark.sql import SparkSession
@@ -14,12 +16,20 @@ spark = SparkSession.builder.appName(APP_NAME).getOrCreate()
 # Subscribe to 1 topic
 
 while True:
+    # Cannot get to work, writestream error
     df = (
         spark.readStream.format("kafka")
         .option("kafka.bootstrap.servers", "127.0.0.1:9092")
-        .option("subscribe", "test_topic")
+        .option("subscribe", "recent_tweets_downloader")
         .load()
     )
 
-    print(df)
+    # print(type(df))
+    # print(dir(df))
+    # break
+
+    print(df.tail(5))
+    # print(dir(df))
+    # print(df.writeStream.start())
+    # print(df.head())
     time.sleep(1)
